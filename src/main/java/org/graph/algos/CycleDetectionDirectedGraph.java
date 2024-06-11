@@ -1,8 +1,6 @@
-package org.example;
+package org.graph.algos;
 
 import java.util.ArrayList;
-
-import static org.example.CreateGraphUtils.createCycleDetectionDirectedGraph;
 
 public class CycleDetectionDirectedGraph {
 
@@ -27,7 +25,7 @@ public class CycleDetectionDirectedGraph {
     public static void main(String[] args) {
         int V = 4;
         ArrayList<Edge>[] graph = new ArrayList[V];
-        createCycleDetectionDirectedGraph(graph);
+        CreateGraphUtils.createCycleDetectionDirectedGraph(graph);
 
         boolean[] vis = new boolean[V];
         boolean[] recursiveVertex = new boolean[V];
