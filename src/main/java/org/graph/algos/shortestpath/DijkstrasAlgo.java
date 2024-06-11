@@ -1,6 +1,6 @@
 package org.graph.algos.shortestpath;
 
-import org.graph.algos.WeightedEdge;
+import org.graph.algos.edge.util.WeightedEdge;
 import org.graph.algos.shortestpath.utility.DijkstrasGraphCreation;
 
 import java.util.ArrayList;

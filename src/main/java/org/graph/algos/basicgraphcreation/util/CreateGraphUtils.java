@@ -1,4 +1,6 @@
-package org.graph.algos;
+package org.graph.algos.basicgraphcreation.util;
+
+import org.graph.algos.edge.util.Edge;
 
 import java.util.ArrayList;
 

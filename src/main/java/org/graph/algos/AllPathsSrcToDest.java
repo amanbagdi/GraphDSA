@@ -1,9 +1,11 @@
 package org.graph.algos;
 
+import org.graph.algos.edge.util.Edge;
+
 import java.util.ArrayList;
 import java.util.Stack;
 
-import static org.graph.algos.CreateGraphUtils.createGraph;
+import static org.graph.algos.basicgraphcreation.util.CreateGraphUtils.createGraph;
 
 public class AllPathsSrcToDest {
 

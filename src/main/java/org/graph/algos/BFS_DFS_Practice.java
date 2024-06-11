@@ -1,10 +1,12 @@
 package org.graph.algos;
 
+import org.graph.algos.edge.util.Edge;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static org.graph.algos.CreateGraphUtils.createGraph;
+import static org.graph.algos.basicgraphcreation.util.CreateGraphUtils.createGraph;
 
 public class BFS_DFS_Practice {
 

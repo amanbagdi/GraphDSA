@@ -1,4 +1,4 @@
-package org.graph.algos;
+package org.graph.algos.edge.util;
 
 public class Edge {
     public int src;

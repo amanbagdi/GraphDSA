@@ -1,6 +1,6 @@
 package org.graph.algos.shortestpath.utility;
 
-import org.graph.algos.WeightedEdge;
+import org.graph.algos.edge.util.WeightedEdge;
 
 import java.util.ArrayList;
 

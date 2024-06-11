@@ -1,6 +1,6 @@
 package org.graph.algos.minimumspanningtree;
 
-import org.graph.algos.WeightedEdge;
+import org.graph.algos.edge.util.WeightedEdge;
 import org.graph.algos.minimumspanningtree.util.PrimsGraphCreation;
 
 import java.util.ArrayList;
