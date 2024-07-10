@@ -1,4 +1,4 @@
-package org.graph.algos;
+package org.graph.algos.topologicalsort.dfs;
 
 import org.graph.algos.basicgraphcreation.util.CreateGraphUtils;
 import org.graph.algos.edge.util.Edge;
