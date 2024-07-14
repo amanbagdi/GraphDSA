@@ -1,0 +1,366 @@
+Graphs Theory
+
+Graph is network of nodes. It consists of vertices and edges.
+
+Edges Types (so as Graphs):
+
+Based on Direction
+
+- [ ] Undirected
+- [ ] Directed
+
+Based on Weight
+
+- [ ] Weighted
+- [ ] Unweighted
+
+
+Ways in which Graph can be created / represented in system:
+
+1. Adjacency List (Array of ArrayList/ ArrayList of ArrayList/ with HashMap as well).
+2. Adjacency Matrix.
+3. Edge List.
+4. Implicit Graph (2D Matrix).
+
+
+Adjacency List (Best way)
+
+- [ ] Array of ArrayList.
+- [ ] Array indexes represent vertices (0 to n-1), and on each array index - n list of Edges (src, dest, weight) for each of its neighbour is present.
+- [ ] It is an optimal and more efficient way of storing Graphs in the system because :
+        - [ ] Better Time Complexity: searching (neighbours) takes optimal time, i.e.  O(E) time, because through array index we can directly locate the specific vertex and then go at that index and loop through the list of edges to get all of its neighbours. Nothing extra to be traversed.
+        - [ ] Better Space Complexity: The vertices and edges are stored only once and no extra space is used for storing neighbour vertices. Only the connected edges are stored.
+
+Adjacency Matrix
+
+- [ ] Matrix of VxV. (No. of vertices x No. of vertices)
+- [ ] A matrix is created of 0 to n-1 by 0 to n-1, where we take row numbers as main vertices and fill up the value as “1” in case of unweighted graph / value as “weight” in case of weighted graph, wherever an edge exist and fill up the value as 0 wherever there is no edge.
+- [ ] It not efficient as Adjacency List because:
+        - [ ] Time Complexity not that good: searching neighbours takes more time, i.e. O(VxV) time, because each and every vertex is traversed to find out whether it’s a neighbour or not.
+        - [ ] Space Complexity not that good: storing values for each possible edge, connected (1 / weight) as well disconnected (0) takes up more memory.
+
+
+Edge List
+
+- [ ] List of connected edges.
+- [ ] Used in case of edge sorting.
+
+
+Implicit Graph
+
+- [ ] A graph like structure observed in a 2D Matrix, where we can solve the problems by considering a 2D Matrix to a graph.
+- [ ] For example, move in the matrix like -> (i-1, j), (i+1, j), (i, j-1), (i, j+1).
+
+
+
+Traversal in Graphs
+
+1. Breadth First Search/ Breadth First Traversal (All the neighbour first - Level order traversal) - Queue ————————————— No recursion, just iterate until queue is empty.
+2. Depth First Search/ Depth First Traversal (neighbour of neighbour - deep order traversal) - Nothing/ Stack —————————- Recursion, loop terminates once all vertices/nodes are visited.
+
+- [ ] Connected Graph - Start from any one node/vertex and traverse the graph completely.
+- [ ] Disconnected Graph - Loop through all the remaining vertices which are not visited yet and then traverse the rest of them.
+
+
+- [ ] All Path traversing - Modified DFS (keep updating visited[curr] to true while going forward and false while returning back).
+
+
+Cycle Detection (Modified DFS)
+
+1. Undirected Graph - If the neighbour vertex, is not a Parent of current vertex/node and is already visited then this the cycle condition.
+2. Directed Graph -  Take visited[] and recursiveVertexStack[] and if the neighbour (of current node) is visited and already present in recursiveVertexStack[], then this is a cycle condition.
+
+Note: In case of Disconnected graphs same strategy will be applied as before.
+
+
+Topological Sorting
+
+￼
+￼
+￼
+
+￼
+
+￼
+
+￼
+
+
+- [ ] It is used only for DAG (Directed Acyclic Graphs with no cycles).
+- [ ] It is the linear order of vertices such that every directed edge u -> v ,the vertex u should come before v in order.
+- [ ] Start traversing from the vertex/node from which we can move forward, and not the vertex/node from which we cannot move forward. But while coding start with 0 vertex only.
+- [ ] Use Stack as data structure to store child nodes.
+- [ ] The node which should come first in the linear order of vertices should be store last in the stack, that is why we should store all the child of child nodes first in the stack.
+- [ ] There can be multiple linear order of a graph. (In above example, source node can be 5 or 4 because we can traverse forward from them).
+
+
+Shortest Path Algorithms (To calculate shortest path/distance to all the nodes/vertices from the source node/vertex)
+
+1. Dijkstra’s Algorithm ———— Greedy Algorithm (At every step/iteration, the best is to be selected out of all nodes in a graph)
+2. Bellman Ford Algorithm—— Dynamic Programming Approach
+
+
+Dijkstra’s Algorithm
+
+- [ ] A BFS based algorithm which make use of Priority Queue instead of normal Queue.
+- [ ] Priority Queue is of a Pair type having 2 fields as int node and its distance from source node. And the priority is decided based on distance. The less is the distance, the more is the priority.
+- [ ] By default in Java, Priority Queue sorts the elements in ascending order meaning the priority of elements having less value is more.
+
+Steps:
+1. Initialisation -> Priority Queue with source node and distance=0 i.e {0,0}, distance[] of size V initialised with value as infinity for all nodes/vertices except source vertex, boolean visited[].
+2. Loop until Priority Queue is empty.
+3. Remove element from queue.
+4. Check if the element is not visited.
+5. Mark it as visited.
+6. For every edge of current element (for every neighbour), u=e.src, v=e.dest and check for Relaxation condition.
+7. If relaxation condition is met then add that neighbour node and updated distance in priority queue.
+
+Relaxation condition: To compare if current distance of neighbour node/vertex from source node is more than the distance of current node from source node + distance between current and neighbour node. If yes, then update the distance of neighbour node.
+
+If (dist[u] + e.wt < dist[v]) {  // u=current node, v=neighbour node
+	dist[v] = dist[u] + e.wt;
+}
+
+Time Complexity - O(E + ElogV)
+
+Advantage - Better time complexity than Bellman Ford Algorithm in case where all weights are positive.
+
+Drawback - Algorithm fails if the weights are negative. Can only be used if all the weights are positive in the graph.
+
+
+
+Bellman Ford Algorithm
+
+- [ ] Can be used in case of positive as well as negative weights.
+- [ ] EdgeList can be used to store all the edges present in the graph. (ArrayList<Edge>)
+
+
+Steps:
+
+1. Perform the below operation V-1 times.
+2. For all edges (u, v)                              // perform Relaxation condition
+	if (dist[u] + wt(u, v) < dist[v])
+		dist[v] = dist[u] + wt(u, v)
+
+
+Why V-1 times?
+Because from source node to any other node in the graph, there can be maximum V-1 nodes in between them that is in the path from source node to any other node in the graph there can be at max V-1 nodes therefore if we iterate V-1 times on all the edges of a graph then we will be able to traverse each and every path and we will be able to calculate the shortest path from source node to any other node.
+
+Time Complexity - O (V x E)
+
+Advantage - Algorithm works for both positive and negative weights.
+
+Disadvantage - Time complexity is more as compared to Dijkstra’s algorithm is case of positive weights.
+
+Fails - Algorithm fails for Negative weighted cycles. Because if a cycle is formed with higher negative weights then the loop goes on till negative infinity while continuously updating distance to smaller and smaller values (negative values).
+
+————————————————
+
+Minimum Spanning Tree (MST) / Minimum weight spanning tree
+
+It is a subset of the edges of connected, weighted, undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight.
+
+Conditions for a MST:
+- [ ] All vertices should be present.
+- [ ] All vertices should be connected.
+- [ ] No cycles.
+- [ ] Minimum total edge weight.
+
+Prim’s Algorithm (To find MST)
+
+- [ ] This algorithm is based on MST Set and Non-MST Set.
+- [ ] Based on BFS, similar approach to be followed as Dijkstra’s algorithm. (Minimum cost Dijkstra)
+
+
+Theoretical Steps:
+
+1. Create 2 sets - one MST set and one Non-MST set.
+2. MST Set is represented by boolean vis[] and Non-MST set is represented by Priority Queue.
+3. Initially place all the vertices/nodes in the non-MST set.
+4. Pick a node from Non-MST set (Priority Queue) and put it into MST set and mark the vis[curr] = true.
+5. Traverse all the neighbours of the node places in MST set in previous step and find out the neighbour with least edge weight.
+6. Select that neighbour and pull it from Non-MST set (Priority Queue) and put it into MST Set (vis[curr]=true) and also select that least edge between the two nodes.
+7. Add the cost/weight in total cost/weight of the graph which was initialised as zero. (Cost = 0 + current min edge weight)
+8.  Repeat steps 4, 5 and 6 for all the nodes present in MST set, until the MST set have all the nodes and Non-MST Set is empty.
+9. The resultant total cost is the minimum possible cost of spanning tree and the resultant graph is Minimum Spanning Tree with all nodes connected, with no cycles (hence called as Tree) and minimum weight
+
+
+Practical Steps:
+
+1. Initialisation -> Priority Queue with source node and cost=0 i.e {0,0}, boolean vis[V], minCost = 0, Pair class (int node, int cost) and sort it by cost.
+2. Loop until Priority Queue is empty.
+3. Remove a pair from Priority Queue and assign it to current.
+4. Check if vis[curr.node] = false.
+5. Mark vis[curr.node] = true.
+6. Add the cost, minCost += curr.cost.
+7. Loop through all neighbour of curr node.
+8. If neighbour is not visited yet (vis[e.dest]=false), then add it into Priority Queue (e.dest, e,wt).
+
+
+Time Complexity - O (E logE)
+
+———————————————————
+
+
+Strongly Connected Component
+
+- [ ] It is a component in which we can reach every vertex of the component from every other vertex in that component.
+- [ ] This is beneficial only in case of Directed Graph. (Because in undirected graph every vertex is reachable from every other vertex and hence its a single strongly connected component)
+- [ ] Unweighted Graph. (Presence of weight makes no sense for this concept)
+
+
+Kosaraju’s Algorithm
+
+Steps:
+
+1. Get all the nodes in a Stack via Topological Sort. O(V+E)
+2. Transpose the graph (Reverse the each and every direction of edge in the graph). O(V+E)
+3. Perform DFS  according to the stack nodes on the transpose graph. O(V+E)
+
+Time Complexity - O(V+E)
+
+—————————————————————
+
+Bridge in Graphs
+
+- [ ] Bridge is an edge whose deletion increases the connected components in the graph.
+- [ ] There can one or more such edges.
+- [ ] Undirected graph.
+- [ ] DFS.
+
+
+Two things we use to find out bridge in graph:
+
+1. Discovery Time (time to discover current node from the source node): dt[] = int[V].
+2. Lowest Discovery Time of all neighbours including current node: low[] = int[V].
+
+Note: Each node will store 2 values, first dt(time to discover curr node from source node) and low (minimum of discovery time of current node and all of its neighbours discovery time).
+
+
+Tarjan’s Algorithm
+
+
+Bridge detection condition
+
+dt[u] < low[v] , (u-> src/current code and v-> dest/neighbour node)
+
+If this condition is fulfilled then this indicates that only one edge exists between node u and node v and there is no back edge. Therefore, the edge u->v can be considered as a Bridge  because if we delete this edge from the graph then the number of connected components will increase.
+
+This is so because the node u will come first while traversal and hence its discovery time will be less when compared to node v, which will be discovered later after the node u, provided that there is a single possible way to reach node v that is from node u only and no back edge exist which can discover node v before node u.
+
+low[v] - means discovery time of node u will be less than the minimum discovery time of its neighbour node v and discovery time of all the neighbours of node v which gets discovered after node v.
+
+
+Steps:
+
+1. Initialisation -> int dt[V], int low[V], boolean vis[V], parent=-1, time=0.
+2. Select a source node, mark it visited.
+3. Set dt[curr] = low[curr] = ++time.
+4. Loop through all the neighbours.
+5. If neighbour is parent then ignore and continue the loop to next neighbour. (This is because in case the neighbour is parent then we can’t say that this is a bridge or not).
+6. Else if the neighbour is already visited that is vis[e.dest]=true, then update the low[curr] as, low[curr] = min(low[curr], dt[e.dest]). (e.dest = neighbour)
+7. Else if neighbour is not parent and not visited then perform DFS, that is repeat steps from 2 to 7. Then update low of current node as low[curr] = min(low[curr], low[e.dest]). Then check for Bridge Detection Condition, that is if (dt[curr] < low[e.dest]) then print curr -> e.dest. This is the bridge edge.
+
+—————————————————————————————
+
+Articulation Point
+
+A vertex in an undirected connected graph is an articulation point (or cut vertex) if removing it (and edges through it) disconnects the graph.
+
+
+Tarjan’s Algorithm
+
+Ancestor: a node A that was discovered before current node in DFS, is the ancestor of current node.
+
+Naive approach: Remove each node and its edges and check if it is an Articulation Point or not. Time Complexity - O(V * (V+E))
+Tarjan’s approach: Time Complexity - O(V+E)————Better
+
+
+ Articulation Point Conditions:
+
+1. If parent=-1 (start of DFS) and disconnected children > 1, then current node is an articulation point.
+2. If parent!=-1 then two cases:
+    1. If, u->v, single route/edge is there then we can check dt[curr] < low[neighbour], if this is true then the current node is an articulation point.
+    2. If a cycle exits, u->a->c->b->u, if this is true then the current node is an articulation point. In this case, dt[curr] = low[neighbour].
+    3. Combining 2.1 and 2.2 gives, (dt[curr] <= low[neighbour] && parent != -1).
+
+
+Steps:
+
+1. Declaration-> boolean vis[V], int dt[V], int low[V], children=0, parent=-1, time=0.
+2. Initialisation-> vis[curr]=true, dt[curr]=low[curr]=++time.
+3. Loop through all neighbours of current node.
+    1. If neighbour = parent, then ignore and move to next neighbour.
+    2. Else if neighbour is already visited, then update low[curr] as low[curr] = min(low[curr], dt[neighbour]).
+    3. Else if neighbour is not a parent and not visited.
+        1. Perform DFS for neighbour node.
+        2. Update low[curr] as low[curr] = min(low[curr], low[neighbour]).
+        3. Check if (dt[curr] <= low[neighbour] && parent = -1). If true, current node is an articulation point.
+        4. children++ (out of if condition of above step)
+4. Check if (parent == -1 && children > 1), then current node is an articulation point.
+
+———————————————————————————————————————————————————————————
+
+Topological Sort using BFS - Kahn’s Algorithm
+
+inDegree array - will contain number of incoming edges to that particular vertex/node.
+
+Steps:
+
+1. Create a normal queue.
+2. Create an int type inDegree array.
+3. Add the vertices/nodes to the queue which have inDegree value = 0.
+4. Loop until queue is empty.
+5. Remove the node from the queue and print it.
+6. Remove all the edges originating from the node removed in last step, .i.e decrement the inDegree value by 1 of the neighbours of the node removed.
+7. If inDegree value = 0 for any if the neighbours then add that node in the queue.
+
+Output: Nodes in topological sorted order.
+
+_________________________________________________________________________________________________
+
+Disjoint Set Union (DSU)/ Union-Find
+
+Let there be n disjoint (different/ sets which have no relation among each other) sets.
+
+So to combine them or establish a relation between them we perform UNION operation.
+
+Every set has a parent/leader/representative among themselves. If the is only one element in the set the, that one element is only the parent/leader of that set.
+
+Two operations are there:
+
+1. Find - To find the parent of a particular set.
+2. Union - Find parent of the 2 different sets and establish a relation between them by getting them together in a single set.
+
+- [ ] Declare a parent array of type int - to store the parent of each element/node. Initialise the array with the element itself (index itself).
+
+
+Path Compression: Find operation can be optimised by using Path Compression.
+
+Implementation - Assign the ultimate parent/ top parent to the parent of each element/node in the hierarchy in Find operation.
+
+
+DSU By Rank (In Union operation)
+
+1. Declare a rank array of type int - to store rank of each element. Initialise the array with 0 for all elements.
+2. Find the parents of 2 sets to be merged.
+3. If the parents are equal then return and do nothing.
+4. Else If the parents are different then check rank of parents:
+    1. If ranks are same then select any of the parent and assign the same parent to other element as well and increase the rank of the parent selected by 1.
+    2. Else if rank of parent of 1st set is more then the 2nd one then update the parent of 2nd one to the parent of 1st one and do not alter the ranks.
+    3. Else if rank of parent of 2nd set is more then do vice-versa.
+
+
+
+DSU By Size
+
+1. Declare a size array of type int - to store size of the elements added. Initialise each index with 1.
+2. Find the parents of 2 sets to be merged.
+3. If the parents are equal then return and do nothing.
+4. Else If the parents are different then check size of parents:
+    1. If size of parent of 1st element is more then the 2nd one then update the parent of 2nd one to the parent of 1st one and update the size of parent of 1st element to -> size of parent of 1st + size of parent of second element.
+    2. Else vice versa.
+
+
+
+
