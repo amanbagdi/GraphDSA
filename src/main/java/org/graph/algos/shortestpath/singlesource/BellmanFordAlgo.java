@@ -1,4 +1,4 @@
-package org.graph.algos.shortestpath;
+package org.graph.algos.shortestpath.singlesource;
 
 import org.graph.algos.edge.util.WeightedEdge;
 import org.graph.algos.shortestpath.utility.BellmanFordGraphCreation;
