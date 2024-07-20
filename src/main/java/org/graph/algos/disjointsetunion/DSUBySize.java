@@ -1,5 +1,7 @@
 package org.graph.algos.disjointsetunion;
 
+import java.util.Arrays;
+
 public class DSUBySize {
 
     public static void main(String[] args) {
@@ -26,6 +28,15 @@ public class DSUBySize {
             System.out.println("Different");
         }
 
+        int[][] edges = {{3,1,2}, {1,1,4}, {3,2,3}, {2,1,4}};
+        Arrays.sort(edges, (o1, o2) -> o2[0] - o1[0]);
+
+        for (int[] arr: edges) {
+            for (int i: arr) {
+                System.out.print(i);
+            }
+            System.out.println();
+        }
     }
     
 }
