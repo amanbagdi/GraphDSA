@@ -1,7 +1,7 @@
-package org.tree.algos.traversal;
+package org.tree.algos.binarytree.traversal;
 
-import org.tree.algos.BuildTreePreOrder;
-import org.tree.algos.util.Node;
+import org.tree.algos.binarytree.BuildTreePreOrder;
+import org.tree.algos.binarytree.util.Node;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package org.tree.algos.util;
+package org.tree.algos.binarytree.util;
 
 public class Node {
 

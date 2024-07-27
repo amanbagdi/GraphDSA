@@ -1,7 +1,7 @@
-package org.tree.algos.questions;
+package org.tree.algos.binarytree.questions;
 
-import org.tree.algos.BuildTreePreOrder;
-import org.tree.algos.util.Node;
+import org.tree.algos.binarytree.BuildTreePreOrder;
+import org.tree.algos.binarytree.util.Node;
 
 public class HeightOfTree {
 

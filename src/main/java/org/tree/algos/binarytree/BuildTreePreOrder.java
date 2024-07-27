@@ -1,6 +1,6 @@
-package org.tree.algos;
+package org.tree.algos.binarytree;
 
-import org.tree.algos.util.Node;
+import org.tree.algos.binarytree.util.Node;
 
 public class BuildTreePreOrder {
 
